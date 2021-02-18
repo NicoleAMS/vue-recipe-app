@@ -8,13 +8,13 @@
 </template>
 
 <script>
-import TheHeader from "./components/layout/TheHeader.vue"; 
+import TheHeader from "./components/layout/TheHeader.vue";
 
 export default {
   components: {
-    TheHeader 
-  }
-}
+    TheHeader,
+  },
+};
 </script>
 
 <style lang="scss">
@@ -26,16 +26,12 @@ export default {
   color: #2c3e50;
 }
 
-#nav {
-  padding: 30px;
+a {
+  font-weight: bold;
+  color: #2c3e50;
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #CF2137;
-    }
+  &.router-link-exact-active {
+    color: #cf2137;
   }
 }
 

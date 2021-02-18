@@ -1,7 +1,7 @@
 <template>
   <header>
     <nav>
-      <router-link to="/" id="logo-link"
+      <router-link to="/" class="logo-link"
         ><img class="logo" :src="siteLogo" alt=""
       /></router-link>
       <ul>
@@ -46,7 +46,7 @@ header {
     align-items: center;
   }
 
-  .logo {
+  .logo, .logo-link {
     height: 80px;
   }
 
@@ -69,10 +69,6 @@ header {
       display: inline-block;
       padding: 0.75rem 1.5rem;
       border: 1px solid transparent;
-    }
-
-    a#logo-id {
-      height: 80px;
     }
 
     a:active,
