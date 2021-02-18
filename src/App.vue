@@ -26,14 +26,14 @@ export default {
   color: #2c3e50;
 }
 
-a {
-  font-weight: bold;
-  color: #2c3e50;
+// a {
+//   font-weight: bold;
+//   color: #2c3e50;
 
-  &.router-link-exact-active {
-    color: #cf2137;
-  }
-}
+//   &.router-link-exact-active {
+//     color: #cf2137;
+//   }
+// }
 
 * {
   box-sizing: border-box;

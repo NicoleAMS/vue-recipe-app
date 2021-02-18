@@ -11,6 +11,7 @@ const routes = [
   {
     path: "/recipes/:id",
     component: RecipeDetail,
+    props: true,
     children: [{ path: "edit", component: RecipeForm }],
   },
   { path: "/:notFound(.*)", component: NotFound },

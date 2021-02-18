@@ -35,4 +35,9 @@ export default {
   color: #fff;
   cursor: pointer;
 }
+
+.red {
+  border: none;
+  background-color: rgba(207,33,55, 0.3);
+}
 </style>
