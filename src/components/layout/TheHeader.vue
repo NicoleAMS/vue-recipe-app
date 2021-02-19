@@ -11,6 +11,9 @@
         <li>
           <router-link to="/">Signup</router-link>
         </li>
+        <li>
+          <router-link to="/recipes/new">Add Recipe</router-link>
+        </li>
       </ul>
     </nav>
   </header>
@@ -46,7 +49,8 @@ header {
     align-items: center;
   }
 
-  .logo, .logo-link {
+  .logo,
+  .logo-link {
     height: 80px;
   }
 

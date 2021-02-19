@@ -20,7 +20,7 @@ import RecipeItem from "@/components/recipes/RecipeItem.vue";
 
 export default {
   components: {
-    RecipeItem
+    RecipeItem,
   },
   computed: {
     recipes() {
@@ -39,6 +39,9 @@ ul {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
 
+h1 {
+  text-align: center;
 }
 </style>
