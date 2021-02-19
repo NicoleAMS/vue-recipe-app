@@ -1,7 +1,7 @@
 export default {
-  addRecipe(context, payload) {
+  async addRecipe(context, payload) {
     const recipe = {
-      id: `r${context.getters.recipes.length + 1}`,
+      // id: `r${context.getters.recipes.length + 1}`,
       title: payload.title,
       description: payload.description,
       category: payload.category,
@@ -11,6 +11,18 @@ export default {
       steps: payload.steps,
       image: `https://source.unsplash.com/300x200/?${payload.title}`,
     };
+
+    const response = await fetch(`https://vue-recipe-app-f7902-default-rtdb.europe-west1.firebasedatabase.app/recipes.json`, {
+      method: 'POST',
+      body: JSON.stringify(recipe)
+    });
+
+    const responseData = await response.json();
+
+    if (!response.ok) {
+      const error = new Error(responseData.message || 'Failed to save recipe');
+      throw error;
+    }
 
     context.commit("addRecipe", recipe);
   },
