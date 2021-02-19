@@ -30,6 +30,18 @@ export default {
       return this.$store.getters.hasRecipes;
     },
   },
+  created() {
+    this.loadRecipes();
+  },
+  methods: {
+    async loadRecipes() {
+      try {
+        await this.$store.dispatch("getRecipes");
+      } catch(error) {
+        console.log(this.error || 'Something went wrong while loading recipes');
+      }
+    }
+  },
 };
 </script>
 
