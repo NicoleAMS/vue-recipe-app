@@ -22,18 +22,8 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  // text-align: center;
   color: #2c3e50;
 }
-
-// a {
-//   font-weight: bold;
-//   color: #2c3e50;
-
-//   &.router-link-exact-active {
-//     color: #cf2137;
-//   }
-// }
 
 * {
   box-sizing: border-box;
@@ -41,5 +31,30 @@ export default {
 
 body {
   margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+button {
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  font: inherit;
+  background-color: #cf2137;
+  border: 1px solid #cf2137;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
+a:hover,
+a:active,
+button:hover,
+button:active {
+  background-color: #2c3e50;
+  border-color: #2c3e50;
 }
 </style>

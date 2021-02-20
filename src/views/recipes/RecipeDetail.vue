@@ -1,6 +1,6 @@
 <template>
   <div class="recipe-page">
-    <base-card>
+    <base-card v-if="recipe">
       <img :src="image" :alt="title" />
       <div class="intro">
         <h1>{{ title }}</h1>
@@ -32,31 +32,43 @@
         </div>
         <div class="right">
           <base-card mode="red">
-          <h3>Details</h3>
+            <h3>Details</h3>
             <ul>
               <li>Cuisine: {{ recipe.cuisine }}</li>
               <li>Category: {{ recipe.category }}</li>
               <li>Difficulty: {{ recipe.difficulty }}</li>
             </ul>
           </base-card>
+          <button>
+            <router-link :to="updateLink">Edit recipe</router-link>
+          </button>
         </div>
       </main>
     </base-card>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 export default {
   props: ["id"],
-  data() {
-    return {
-      recipe: null,
-    };
-  },
   created() {
-    this.recipe = this.$store.getters.recipes.find((r) => r.id === this.id);
+    // this.recipe = this.$store.getters.recipes.find((r) => r.id === this.id);
+    this.loadRecipe();
+  },
+  methods: {
+    async loadRecipe() {
+      try {
+        await this.$store.dispatch("getRecipe", this.id);
+      } catch (error) {
+        console.log(this.error || "Something went wrong while loading this recipe");
+      }
+    },
   },
   computed: {
+    recipe() {
+      return this.$store.getters.activeRecipe;
+    },
     title() {
       return this.recipe.title;
     },
@@ -71,6 +83,9 @@ export default {
     },
     steps() {
       return this.recipe.steps;
+    },
+    updateLink() {
+      return `/recipes/${this.id}/edit`;
     },
   },
 };
@@ -130,5 +145,9 @@ li {
 
 input {
   margin-right: 10px;
+}
+
+button {
+  margin-top: 20px;
 }
 </style>

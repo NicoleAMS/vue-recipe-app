@@ -15,7 +15,7 @@ export default {
           ],
           steps: ['Melt butter in a large pot over medium-high heat. Stir in salt, red onions and sweet onions. Cook 35 minutes, stirring frequently, until onions are caramelized and almost syrupy.', 'Mix chicken broth, beef broth, red wine and Worcestershire sauce into pot. Bundle the parsley, thyme, and bay leaf with twine and place in pot. Simmer over medium heat for 20 minutes, stirring occasionally. Remove and discard the herbs. Reduce the heat to low, mix in vinegar and season with salt and pepper. Cover and keep over low heat to stay hot while you prepare the bread.', 'Preheat oven broiler. Arrange bread slices on a baking sheet and broil 3 minutes, turning once, until well toasted on both sides. Remove from heat; do not turn off broiler.'],
           cuisine: 'French',
-          category: 'Soups',
+          category: 'Soup',
           difficulty: 3,
           image: 'https://images.unsplash.com/photo-1549396563-92fab230895a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80'
         },
@@ -45,7 +45,8 @@ export default {
           difficulty: 3,
           image: 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=676&q=80'
         }
-      ]
+      ],
+      activeRecipe: null
     }
   },
   mutations,

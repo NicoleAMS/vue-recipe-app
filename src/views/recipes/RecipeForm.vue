@@ -1,6 +1,7 @@
 <template>
   <div class="recipe-form-page">
-    <h1>Add Recipe</h1>
+    <h1 v-if="id ===''">Add Recipe</h1>
+    <h1 v-else>Edit Recipe</h1>
     <base-card>
       <form @submit.prevent="submitForm">
         <div class="form-content">
@@ -25,7 +26,7 @@
             </div>
             <div class="form-group">
               <label>Ingredients</label>
-              <div id="ingredientList">
+              <div class="ingredientList">
                 <input
                   type="text"
                   class="form-control"
@@ -85,6 +86,15 @@
                 <option value="2">Intermediate</option>
                 <option value="3">Advanced</option>
               </select>
+              <div class="form-group">
+                <label for="image" class="form-label">Image URL</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="image"
+                  v-model.trim="image"
+                />
+              </div>
             </div>
             <button type="submit">Submit</button>
           </div>
@@ -105,9 +115,17 @@ export default {
       cuisine: "Chinese",
       category: "Salad",
       level: "1",
+      image: '',
       ingredients: [],
       steps: [],
+      id: "",
     };
+  },
+  created() {
+    this.id = this.$route.params.id || "";
+    if (this.id !== "") {
+      this.fillForm();
+    }
   },
   methods: {
     addIngredient() {
@@ -115,6 +133,22 @@ export default {
     },
     addSteps() {
       this.numOfSteps++;
+    },
+    fillForm() {
+      const recipe = this.$store.getters.recipes.find(
+        (recipe) => recipe.id === this.id
+      );
+      this.title = recipe.title;
+      this.description = recipe.description;
+      this.ingredients = recipe.ingredients;
+      this.steps = recipe.steps;
+      this.cuisine = recipe.cuisine;
+      this.category = recipe.category;
+      this.difficulty = recipe.difficulty;
+      this.image = recipe.image;
+
+      this.numOfIngredients = this.ingredients.length;
+      this.numOfSteps = this.steps.length;
     },
     submitForm() {
       // validate form
@@ -126,8 +160,14 @@ export default {
         difficulty: this.level,
         ingredients: this.ingredients,
         steps: this.steps,
+        image: this.image
       };
-      this.$store.dispatch("addRecipe", recipe);
+      if (this.id !== "") {
+        recipe.id = this.id;
+        this.$store.dispatch("updateRecipe", recipe);
+      } else {
+        this.$store.dispatch("addRecipe", recipe);
+      }
       this.$router.replace("/recipes");
     },
   },
@@ -202,23 +242,4 @@ select:focus {
   background-size: 16px 12px;
 }
 
-button {
-  text-decoration: none;
-  padding: 0.75rem 1.5rem;
-  font: inherit;
-  background-color: #cf2137;
-  border: 1px solid #cf2137;
-  color: white;
-  cursor: pointer;
-  display: inline-block;
-  margin-bottom: 15px;
-}
-
-a:hover,
-a:active,
-button:hover,
-button:active {
-  background-color: #2c3e50;
-  border-color: #2c3e50;
-}
 </style>
