@@ -9,7 +9,7 @@
           <router-link to="/recipes">Recipes</router-link>
         </li>
         <li>
-          <router-link to="/">Signup</router-link>
+          <router-link to="/signup">Signup</router-link>
         </li>
         <li>
           <router-link to="/recipes/new">Add Recipe</router-link>

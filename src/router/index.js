@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import RecipesList from "../views/recipes/RecipesList.vue";
 import RecipeDetail from "../views/recipes/RecipeDetail.vue";
 import RecipeForm from "../views/recipes/RecipeForm.vue";
+import AuthForm from "../views/auth/AuthForm.vue";
 import NotFound from "../views/NotFound.vue";
 
 const routes = [
@@ -14,6 +15,8 @@ const routes = [
     props: true,
     children: [{ path: "edit", component: RecipeForm }],
   },
+  { path: "/signup", component: AuthForm} ,
+  { path: "/login", component: AuthForm },
   { path: "/:notFound(.*)", component: NotFound },
 ];
 
