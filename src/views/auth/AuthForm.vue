@@ -24,11 +24,76 @@
             />
           </div>
         </div>
-        <button type="submit">Submit</button>
+        <p v-if="!formIsValid">
+          Please enter a valid email address and password. Passwords need to
+          have at least 6 characters.
+        </p>
+        <button type="submit">{{ submitBtnText }}</button>
+        <button type="button" class="reverse-btn" @click="changeMode">
+          {{ changeModeBtnText }}
+        </button>
+        <p v-if="!!error">{{ error }}</p>
       </form>
     </base-card>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      email: "",
+      password: "",
+      formIsValid: true,
+      mode: "signup",
+      error: null
+    };
+  },
+  computed: {
+    submitBtnText() {
+      return this.mode === "signup" ? "Signup" : "Login";
+    },
+    changeModeBtnText() {
+      return this.mode === "signup" ? "Login instead" : "Signup instead";
+    },
+  },
+  methods: {
+    async submitForm() {
+      this.validateForm();
+      if (this.formIsValid) {
+        const payload = {
+          email: this.email,
+          password: this.password,
+          mode: this.mode,
+        };
+        try {
+          await this.$store.dispatch("auth", payload);
+          this.$router.replace('/recipes');
+        } catch(error) {
+          this.error = error.message || `Failed to ${this.mode}`;
+        }
+      }
+    },
+    changeMode() {
+      return this.mode === "signup"
+        ? (this.mode = "login")
+        : (this.mode = "signup");
+    },
+    validateForm() {
+      if (
+        this.email === "" ||
+        !this.email.includes("@") ||
+        !this.email.includes(".") ||
+        this.password.length < 6
+      ) {
+        this.formIsValid = false;
+      } else {
+        this.formIsValid = true;
+      }
+    },
+  },
+};
+</script>
 
 <style lang="scss" scoped>
 .auth-form-page {
@@ -76,5 +141,11 @@ select:focus {
 button {
   float: right;
   margin-top: 0.5rem;
+}
+
+.reverse-btn {
+  color: #cf2137;
+  background-color: white;
+  margin-right: 0.5rem;
 }
 </style>

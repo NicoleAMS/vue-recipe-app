@@ -1,9 +1,11 @@
 import { createStore } from "vuex";
 import recipeModule from "./modules/recipes/index.js";
+import authModule from './modules/auth/index.js';
 
 const store = createStore({
   modules: {
-    recipes: recipeModule
+    recipes: recipeModule,
+    auth: authModule
   }
 });
 
