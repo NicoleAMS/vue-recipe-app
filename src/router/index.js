@@ -3,6 +3,7 @@ import RecipesList from "../views/recipes/RecipesList.vue";
 import RecipeDetail from "../views/recipes/RecipeDetail.vue";
 import RecipeForm from "../views/recipes/RecipeForm.vue";
 import AuthForm from "../views/auth/AuthForm.vue";
+import UserProfile from "../views/userProfile/UserProfile.vue";
 import NotFound from "../views/NotFound.vue";
 
 const routes = [
@@ -15,8 +16,8 @@ const routes = [
     props: true,
     children: [{ path: "edit", component: RecipeForm }],
   },
-  { path: "/signup", component: AuthForm} ,
-  { path: "/login", component: AuthForm },
+  { path: "/auth", component: AuthForm},
+  { path: "/users/:id", component: UserProfile },
   { path: "/:notFound(.*)", component: NotFound },
 ];
 

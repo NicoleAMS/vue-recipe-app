@@ -8,8 +8,14 @@
         <li>
           <router-link to="/recipes">Recipes</router-link>
         </li>
-        <li>
-          <router-link to="/signup">Signup</router-link>
+        <li v-if="isLoggedIn">
+          <router-link :to="profileLink">Profile</router-link>
+        </li>
+        <li v-if="!isLoggedIn">
+          <router-link to="/auth">Login</router-link>
+        </li>
+        <li v-else>
+          <a @click="logout">Logout</a>
         </li>
         <li>
           <router-link to="/recipes/new">Add Recipe</router-link>
@@ -27,7 +33,20 @@ export default {
     siteLogo() {
       return image;
     },
+    isLoggedIn() {
+      return this.$store.getters.isAuthenticated;
+    },
+    profileLink() {
+      const userId = this.$store.getters.userId;
+      return `/users/${userId}`;
+    }
   },
+  methods: {
+    logout() {
+      this.$store.dispatch('logout');
+      this.$router.replace('/recipes');
+    }
+  }
 };
 </script>
 
@@ -73,6 +92,7 @@ header {
       display: inline-block;
       padding: 0.75rem 1.5rem;
       border: 1px solid transparent;
+      cursor: pointer;
     }
 
     a:active,

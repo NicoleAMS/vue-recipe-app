@@ -29,4 +29,7 @@ export default {
       token: responseData.idToken
     });
   },
+  logout(context) {
+    context.commit('setUser', null);
+  }
 };
