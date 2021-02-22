@@ -39,9 +39,9 @@
               <li>Difficulty: {{ recipe.difficulty }}</li>
             </ul>
           </base-card>
-          <button>
+          <!-- <button>
             <router-link :to="updateLink">Edit recipe</router-link>
-          </button>
+          </button> -->
         </div>
       </main>
     </base-card>

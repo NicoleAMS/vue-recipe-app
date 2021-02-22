@@ -9,6 +9,7 @@ export default {
       ingredients: payload.ingredients,
       steps: payload.steps,
       image: `https://source.unsplash.com/300x200/?food`,
+      userId: payload.userId
     };
 
     const response = await fetch(
@@ -38,6 +39,7 @@ export default {
       ingredients: payload.ingredients,
       steps: payload.steps,
       image: payload.image,
+      userId: payload.userId
     };
 
     const response = await fetch(
@@ -80,6 +82,7 @@ export default {
         ingredients: responseData[key].ingredients,
         steps: responseData[key].steps,
         image: responseData[key].image,
+        userId: responseData[key].userId
       };
       recipes.push(recipe);
     }

@@ -9,6 +9,7 @@
         </div>
       </base-card>
     </router-link>
+    <button v-if="editable"><router-link :to="editUrl">Edit Recipe</router-link></button>
   </li>
 </template>
 
@@ -19,7 +20,18 @@ export default {
     recipeUrl() {
       return `/recipes/${this.id}`;
     },
+    editUrl() {
+      return `/users/${this.$route.params.id}/recipes/${this.id}/edit`;
+    }
   },
+  data() {
+    return {
+      editable: false
+    }
+  },
+  created() {
+    return this.$route.params.id !== undefined ? this.editable = true : this.editable = false
+  }
 };
 </script>
 
@@ -38,5 +50,13 @@ img {
 a {
   color: #2c3e50;
   text-decoration: none;
+}
+
+button {
+  margin-top: 20px;
+
+  a {
+    color: white;
+  }
 }
 </style>

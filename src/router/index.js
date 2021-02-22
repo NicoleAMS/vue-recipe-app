@@ -15,10 +15,19 @@ const routes = [
     path: "/recipes/:id",
     component: RecipeDetail,
     props: true,
-    children: [{ path: "edit", component: RecipeForm }],
+    // children: [{ path: "edit", component: RecipeForm }],
   },
   { path: "/auth", component: AuthForm },
-  { path: "/users/:id", component: UserProfile, meta: { requiresAuth: true } },
+  {
+    path: "/users/:id",
+    component: UserProfile,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/users/:userid/recipes/:id/edit",
+    component: RecipeForm,
+    props: true,
+  },
   { path: "/:notFound(.*)", component: NotFound },
 ];
 

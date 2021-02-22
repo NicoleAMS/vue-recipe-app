@@ -122,6 +122,7 @@ export default {
     };
   },
   created() {
+    console.log(this.$route.params);
     this.id = this.$route.params.id || "";
     if (this.id !== "") {
       this.fillForm();
@@ -160,7 +161,8 @@ export default {
         difficulty: this.level,
         ingredients: this.ingredients,
         steps: this.steps,
-        image: this.image
+        image: this.image,
+        userId: this.$route.params.userid
       };
       if (this.id !== "") {
         recipe.id = this.id;
