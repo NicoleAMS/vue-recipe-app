@@ -17,9 +17,9 @@
         <li v-else>
           <a @click="logout">Logout</a>
         </li>
-        <li>
+        <!-- <li>
           <router-link to="/recipes/new">Add Recipe</router-link>
-        </li>
+        </li> -->
       </ul>
     </nav>
   </header>

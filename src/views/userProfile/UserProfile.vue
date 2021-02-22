@@ -3,6 +3,7 @@
     <base-card>
       <h1>User Profile</h1>
       <p>{{ email }}</p>
+      <button><router-link :to="newRecipeUrl">Add Recipe</router-link></button>
     </base-card>
   </div>
   <div>
@@ -39,6 +40,9 @@ export default {
       const userId = this.$route.params.id;
       return this.$store.getters.recipes.filter((recipe) => recipe.userId === userId);
     },
+    newRecipeUrl() {
+      return `/users/${this.$route.params.id}/recipes/new`;
+    }
   },
   created() {
     this.loadRecipes();
@@ -72,5 +76,16 @@ export default {
 
 h2 {
   text-align: center;
+}
+
+button {
+  width: fit-content;
+}
+
+ul {
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 </style>

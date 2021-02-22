@@ -10,7 +10,7 @@ import store from "../store";
 const routes = [
   { path: "/", redirect: "/recipes" },
   { path: "/recipes", component: RecipesList },
-  { path: "/recipes/new", component: RecipeForm },
+  // { path: "/recipes/new", component: RecipeForm },
   {
     path: "/recipes/:id",
     component: RecipeDetail,
@@ -23,10 +23,12 @@ const routes = [
     component: UserProfile,
     meta: { requiresAuth: true },
   },
+  { path: "/users/:userid/recipes/new", component: RecipeForm, meta: { requiresAuth: true } },
   {
     path: "/users/:userid/recipes/:id/edit",
     component: RecipeForm,
     props: true,
+    meta: { requiresAuth: true }
   },
   { path: "/:notFound(.*)", component: NotFound },
 ];

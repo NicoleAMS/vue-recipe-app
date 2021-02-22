@@ -8,7 +8,7 @@ export default {
       difficulty: payload.difficulty,
       ingredients: payload.ingredients,
       steps: payload.steps,
-      image: `https://source.unsplash.com/300x200/?food`,
+      image: payload.image,
       userId: payload.userId
     };
 
