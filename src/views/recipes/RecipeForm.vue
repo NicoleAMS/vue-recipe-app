@@ -122,7 +122,6 @@ export default {
     };
   },
   created() {
-    console.log(this.$route.params);
     this.id = this.$route.params.id || "";
     if (this.id !== "") {
       this.fillForm();

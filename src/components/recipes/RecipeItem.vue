@@ -9,7 +9,10 @@
         </div>
       </base-card>
     </router-link>
-    <button v-if="editable"><router-link :to="editUrl">Edit Recipe</router-link></button>
+    <div v-if="editable">
+      <button><router-link :to="editUrl">Edit Recipe</router-link></button>
+      <button @click="deleteRecipe">Delete Recipe</button>
+    </div>
   </li>
 </template>
 
@@ -30,7 +33,12 @@ export default {
     }
   },
   created() {
-    return this.$route.params.id !== undefined ? this.editable = true : this.editable = false
+    return this.$route.params.id !== undefined ? this.editable = true : this.editable = false;
+  },
+  methods: {
+    deleteRecipe() {
+      this.$store.dispatch('deleteRecipe', this.id);
+    }
   }
 };
 </script>
@@ -53,7 +61,7 @@ a {
 }
 
 button {
-  margin-top: 20px;
+  margin: 20px 20px 20px 0;
 
   a {
     color: white;

@@ -9,7 +9,7 @@ export default {
       ingredients: payload.ingredients,
       steps: payload.steps,
       image: payload.image,
-      userId: payload.userId
+      userId: payload.userId,
     };
 
     const response = await fetch(
@@ -39,7 +39,7 @@ export default {
       ingredients: payload.ingredients,
       steps: payload.steps,
       image: payload.image,
-      userId: payload.userId
+      userId: payload.userId,
     };
 
     const response = await fetch(
@@ -82,7 +82,7 @@ export default {
         ingredients: responseData[key].ingredients,
         steps: responseData[key].steps,
         image: responseData[key].image,
-        userId: responseData[key].userId
+        userId: responseData[key].userId,
       };
       recipes.push(recipe);
     }
@@ -100,5 +100,21 @@ export default {
     }
 
     context.commit("loadRecipe", responseData);
+  },
+  async deleteRecipe(context, payload) {
+    const response = await fetch(
+      `https://vue-recipe-app-f7902-default-rtdb.europe-west1.firebasedatabase.app/recipes/${payload}.json`,
+      {
+        method: "DELETE",
+      }
+    );
+
+    const responseData = await response.json();
+
+    if (!response.ok) {
+      const error = new Error(responseData.message || "Failed to load recipes");
+      throw error;
+    }
+    context.commit("deleteRecipe", payload);
   },
 };

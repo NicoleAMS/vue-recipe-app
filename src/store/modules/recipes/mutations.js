@@ -14,5 +14,9 @@ export default {
         rec = payload.recipe;
       }
     });
+  },
+  deleteRecipe(state, payload) {
+    const index = state.recipes.findIndex(recipe => recipe.id === payload);
+    state.recipes.splice(index, 1);
   }
 };
