@@ -23,6 +23,14 @@ export default {
       throw error;
     }
 
+    const expiresIn = responseData.expiresIn * 1000;
+    const expirationDate = new Date().getTime() + expiresIn;
+
+    localStorage.setItem('email', responseData.email);
+    localStorage.setItem('token', responseData.idToken);
+    localStorage.setItem('userId', responseData.localId);
+    localStorage.setItem('tokenExpiration', expirationDate);
+
     context.commit('setUser', {
       email: responseData.email,
       userId: responseData.localId,
@@ -30,6 +38,31 @@ export default {
     });
   },
   logout(context) {
+    localStorage.removeItem('email');
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('tokenExpiration');
+
     context.commit('setUser', null);
+  },
+  autoLogin(context) {
+    const email =  localStorage.getItem('email');
+    const token = localStorage.getItem('token');
+    const userId = localStorage.getItem('userId');
+    const tokenExpiration = localStorage.getItem('tokenExpiration');
+
+    const expiresIn = +tokenExpiration - new Date().getTime();
+
+    if (expiresIn < 0) {
+      return;
+    }
+
+    if (token && userId) {
+      context.commit('setUser', {
+        email: email,
+        userId: userId,
+        token: token
+      });
+    }
   }
 };
