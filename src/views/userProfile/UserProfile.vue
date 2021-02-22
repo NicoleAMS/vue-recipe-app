@@ -12,8 +12,16 @@ export default {
   computed: {
     email() {
       return this.$store.getters.user.email;
-    },
+    }
   },
+  beforeRouteEnter(to, _, next) {
+    const userId = localStorage.getItem('userId');
+    if (to.params.id !== userId) {
+      next('/recipes');
+    } else {
+      next();
+    }
+  }
 };
 </script>
 

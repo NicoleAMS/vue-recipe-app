@@ -5,6 +5,7 @@ import RecipeForm from "../views/recipes/RecipeForm.vue";
 import AuthForm from "../views/auth/AuthForm.vue";
 import UserProfile from "../views/userProfile/UserProfile.vue";
 import NotFound from "../views/NotFound.vue";
+import store from "../store";
 
 const routes = [
   { path: "/", redirect: "/recipes" },
@@ -16,14 +17,22 @@ const routes = [
     props: true,
     children: [{ path: "edit", component: RecipeForm }],
   },
-  { path: "/auth", component: AuthForm},
-  { path: "/users/:id", component: UserProfile },
+  { path: "/auth", component: AuthForm },
+  { path: "/users/:id", component: UserProfile, meta: { requiresAuth: true } },
   { path: "/:notFound(.*)", component: NotFound },
 ];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+});
+
+router.beforeEach(function(to, from, next) {
+  if (to.meta.requiresAuth && !store.getters.isAuthenticated) {
+    next("/auth");
+  } else {
+    next();
+  }
 });
 
 export default router;
